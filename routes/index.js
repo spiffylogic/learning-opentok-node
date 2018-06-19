@@ -54,6 +54,7 @@ router.get('/room/:name', function (req, res) {
 
   // if the room name is associated with a session ID, fetch that
   if (roomToSessionIdDictionary[roomName]) {
+    console.log('fetching existing session ID associated with room ' + roomName);
     sessionId = roomToSessionIdDictionary[roomName];
 
     // generate token
@@ -67,6 +68,7 @@ router.get('/room/:name', function (req, res) {
   }
   // if this is the first time the room is being accessed, create a new session ID
   else {
+    console.log('first time the room ' + roomName + ' is being accessed, creating a new session ID');
     opentok.createSession({ mediaMode: 'routed' }, function (err, session) {
       if (err) {
         console.log(err);
